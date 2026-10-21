@@ -45,7 +45,6 @@ api_url = "http://master-api-v3.vercel.app/"
 api_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzkxOTMzNDE5NSIsInRnX3VzZXJuYW1lIjoi4p61IFtvZmZsaW5lXSIsImlhdCI6MTczODY5MjA3N30.SXzZ1MZcvMp5sGESj0hBKSghhxJ3k1GTWoBUbivUe1I"
 token_cp ='eyJjb3Vyc2VJZCI6IjQ1NjY4NyIsInR1dG9ySWQiOm51bGwsIm9yZ0lkIjo0ODA2MTksImNhdGVnb3J5SWQiOm51bGx9gft'
 
-
 async def show_random_emojis(message):
     emojis = ['🌀', '🔥', '⭐', '💫', '🌈', '☀️', '🌙', '🌸', '🌺', '🌊', '🍃', '🌿', '🍀', '🌻', '🌹', '🪷', '🌲', '☄️', '⛩️', '🕉️']
     emoji_message = await message.reply_text(' '.join(random.choices(emojis, k=1)))
@@ -237,15 +236,22 @@ async def upload(bot: Client, m: Message):
         arg = int(raw_text)
     except:
         arg = 1
+    
+    # 1. Batch Name
     await editable.edit("📚 𝗘𝗻𝘁𝗲𝗿 𝗬𝗼𝘂𝗿 𝗕𝗮𝘁𝗰𝗵 𝗡𝗮𝗺𝗲 📚\n\n🦠 𝗦𝗲𝗻𝗱 `/d` 𝗙𝗼𝗿 𝗨𝘀𝗲 𝗗𝗲𝗳𝗮𝘂𝗹𝘁 🦠")
     input1: Message = await bot.listen(editable.chat.id)
     raw_text0 = input1.text
     await input1.delete(True)
-    if raw_text0 == '/d':
+    
+    if raw_text0 == '/d' or not raw_text0.strip():
         b_name = file_name
     else:
         b_name = raw_text0
+        
+    if not b_name.strip():
+        b_name = "Unknown Batch"
 
+    # 2. Resolution
     await editable.edit("**📸 𝗘𝗻𝘁𝗲𝗿 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻 📸**\n➤ `144`\n➤ `240`\n➤ `360`\n➤ `480`\n➤ `720`\n➤ `1080`")
     input2: Message = await bot.listen(editable.chat.id)
     raw_text2 = input2.text
@@ -268,15 +274,16 @@ async def upload(bot: Client, m: Message):
     except Exception:
             res = "UN"
 
+    # 3. Extracted By / Credit
     await editable.edit("📛 𝗘𝗻𝘁𝗲𝗿 𝗬𝗼𝘂𝗿 𝗡𝗮𝗺𝗲 📛\n\n🐥 𝗦𝗲𝗻𝗱 `/d` 𝗙𝗼𝗿 𝗨𝘀𝗲 𝗗𝗲𝗳𝗮𝘂𝗹𝘁 🐥")
     input3: Message = await bot.listen(editable.chat.id)
     raw_text3 = input3.text
     await input3.delete(True)
     
     # Default Credit
-    credit = "°MR KRISHNA🇮🇳"
+    credit = "<a href="https://t.me/+8SD8Ecle2sBmNDE9">•Ɱའ★Krΐຮhήส•❤️‍🔥</a>"
     if raw_text3 == '/d':
-        CR = '°MR KRISHNA🇮🇳'
+        CR = '<a href="https://t.me/+8SD8Ecle2sBmNDE9">•Ɱའ★Krΐຮhήส•❤️‍🔥</a>'
     elif raw_text3:
         try:
             text, link = raw_text3.split(',')
@@ -286,6 +293,7 @@ async def upload(bot: Client, m: Message):
     else:
         CR = credit
    
+    # 4. PW Token
     await editable.edit("**🔐 𝗘𝗻𝘁𝗲𝗿 𝗣𝘄 𝗧𝗼𝗸𝗲𝗻 𝗙𝗼𝗿 𝗣𝘄 𝗨𝗽𝗹𝗼𝗮𝗱𝗶𝗻𝗴 𝗼𝗿 𝗦𝗲𝗻𝗱 `3` 𝗙𝗼𝗿 𝗢𝘁𝗵𝗲𝗿𝘀**")
     input4: Message = await bot.listen(editable.chat.id)
     raw_text4 = input4.text
@@ -295,7 +303,8 @@ async def upload(bot: Client, m: Message):
     else:
         MR = raw_text4
     
-    await editable.edit("🖼️ 𝗡𝗼𝘄 𝗦𝗲𝗻𝗱 𝗧𝗵𝗲 𝗧𝗵𝘂𝗺𝗯 𝗨𝗿𝗹 𝗘𝗴 » https://graph.org/file/13a89d77002442255efad-989ac290c1b3f13b44.jpg\n\n📌 𝗢𝗿 𝗜𝗳 𝗗𝗼𝗻'𝘁 𝗪𝗮𝗻𝘁 𝗧𝗵𝘂𝗺𝗯𝗻𝗮𝗶𝗹 𝗦𝗲𝗻𝗱 = /d")
+    # 5. Thumbnail
+    await editable.edit("🖼️ 𝗡𝗼𝘄 𝗦𝗲𝗻𝗱 𝗧𝗵𝗲 𝗧𝗵𝘂𝗺𝗯 𝗨𝗿𝗹 𝗘𝗴 » https://ibb.co/PsmQWNJW\n\n📌 𝗢𝗿 𝗜𝗳 𝗗𝗼𝗻'𝘁 𝗪𝗮𝗻𝘁 𝗧𝗵𝘂𝗺𝗯𝗻𝗮𝗶𝗹 𝗦𝗲𝗻𝗱 = /d")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
     await input6.delete(True)
@@ -367,7 +376,13 @@ async def upload(bot: Client, m: Message):
             elif 'master.mpd' in url:
                 url =  f"{api_url}pw-dl?url={url}&token={token_cp}&authorization={api_token}&q={raw_text2}"
 
-            name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
+            # Title Extraction Fix
+            name1 = links[i][0].strip()
+            if not name1:
+                name1 = f"File_{count}" # Fallback agar txt file me naam nahi hai
+            else:
+                name1 = name1.replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
+
             name = name1[:60]   # Remove trailing space
 
             # Force H.264 for streaming compatibility
@@ -382,91 +397,18 @@ async def upload(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
             try:
-                live_time = datetime.now(IST).strftime("%A, %d %B %Y • %I:%M %p")
-                
-                # EXACT SAME CAPTION AS IN YOUR IMAGE (Plain text, no bold)
-                cc_template = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
+                # CAPTION FORMAT (EXACTLY AS YOU ASKED)
+                cc_template = f"Index: {count}\n\nTitle: {name1}.mp4\n\nBatch: {b_name}\n\nExtracted By: {CR}"
 
-· ─ 📚 {b_name}  ─ ·
+                cyt_template = f"Index: {count}\n\nTitle: {name1}.mp4\n\nBatch: {b_name}\n\nLink: {url}\n\nExtracted By: {CR}"
 
-🎞️ Title: {name1}
-├── Extention: {CR}.mp4
-├── Resolution: {res}
+                cpvod_template = f"Index: {count}\n\nTitle: {name1}.mp4\n\nBatch: {b_name}\n\nLink: {url}\n\nExtracted By: {CR}"
 
-📚 Course: {b_name}
+                cimg = f"Index: {count}\n\nTitle: {name1}.jpg\n\nBatch: {b_name}\n\nExtracted By: {CR}"
 
-🌟 Extracted By: {CR}
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-📅 {live_time}'''
+                cczip = f"Index: {count}\n\nTitle: {name1}.zip\n\nBatch: {b_name}\n\nExtracted By: {CR}"
 
-                cyt_template = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
-
-· ─ 📚 {b_name}  ─ ·
-
-🎞️ Title: {name1}
-├── Extention: {CR}.mp4
-├── Resolution: {res}
-├── Video URL: <a href="{url}">Watch Here</a>
-
-📚 Course: {b_name}
-
-🌟 Extracted By: {CR}
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-📅 {live_time}'''
-
-                cpvod_template = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
-
-· ─ 📚 {b_name}  ─ ·
-
-🎞️ Title: {name1}
-├── Extention: {CR}.mp4
-├── Resolution: {res}
-├── Video URL: <a href="{url}">Watch Here</a>
-
-📚 Course: {b_name}
-
-🌟 Extracted By: {CR}
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-📅 {live_time}'''
-
-                cimg = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
-
-· ─ 📚 {b_name}  ─ ·
-
-🖼️ Title: {name1}
-├── Extention: {CR}.jpg
-
-📚 Course: {b_name}
-
-🌟 Extracted By: {CR}
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-📅 {live_time}'''
-
-                cczip = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
-
-· ─ 📚 {b_name}  ─ ·
-
-📦 Title: {name1}
-├── Extention: {CR}.zip
-
-📚 Course: {b_name}
-
-🌟 Extracted By: {CR}
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-📅 {live_time}'''
-
-                cc1 = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
-
-· ─ 📚 {b_name}  ─ ·
-
-📄 Title: {name1}
-├── Extention: {CR}.pdf
-
-📚 Course: {b_name}
-
-🌟 Extracted By: {CR}
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-📅 {live_time}'''
+                cc1 = f"Index: {count}\n\nTitle: {name1}.pdf\n\nBatch: {b_name}\n\nExtracted By: {CR}"
 
                 if "drive" in url:
                     try:
