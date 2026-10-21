@@ -237,8 +237,6 @@ async def upload(bot: Client, m: Message):
         arg = int(raw_text)
     except:
         arg = 1
-    
-    # 1. Batch Name
     await editable.edit("📚 𝗘𝗻𝘁𝗲𝗿 𝗬𝗼𝘂𝗿 𝗕𝗮𝘁𝗰𝗵 𝗡𝗮𝗺𝗲 📚\n\n🦠 𝗦𝗲𝗻𝗱 `/d` 𝗙𝗼𝗿 𝗨𝘀𝗲 𝗗𝗲𝗳𝗮𝘂𝗹𝘁 🦠")
     input1: Message = await bot.listen(editable.chat.id)
     raw_text0 = input1.text
@@ -248,13 +246,6 @@ async def upload(bot: Client, m: Message):
     else:
         b_name = raw_text0
 
-    # 2. Topic (New Addition)
-    await editable.edit("📝 𝗘𝗻𝘁𝗲𝗿 𝗧𝗼𝗽𝗶𝗰 𝗡𝗮𝗺𝗲 📝\n\n(Example: Static Gk, Maths, etc.)")
-    input_topic: Message = await bot.listen(editable.chat.id)
-    topic = input_topic.text
-    await input_topic.delete(True)
-
-    # 3. Resolution
     await editable.edit("**📸 𝗘𝗻𝘁𝗲𝗿 𝗥𝗲𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻 📸**\n➤ `144`\n➤ `240`\n➤ `360`\n➤ `480`\n➤ `720`\n➤ `1080`")
     input2: Message = await bot.listen(editable.chat.id)
     raw_text2 = input2.text
@@ -277,16 +268,15 @@ async def upload(bot: Client, m: Message):
     except Exception:
             res = "UN"
 
-    # 4. Extracted By / Credit
     await editable.edit("📛 𝗘𝗻𝘁𝗲𝗿 𝗬𝗼𝘂𝗿 𝗡𝗮𝗺𝗲 📛\n\n🐥 𝗦𝗲𝗻𝗱 `/d` 𝗙𝗼𝗿 𝗨𝘀𝗲 𝗗𝗲𝗳𝗮𝘂𝗹𝘁 🐥")
     input3: Message = await bot.listen(editable.chat.id)
     raw_text3 = input3.text
     await input3.delete(True)
     
-    # Default Credit changed to match new image
-    credit = "•Mʀ★Kʀíѕhñᴀ•❣️"
+    # Default Credit
+    credit = "°MR KRISHNA🇮🇳"
     if raw_text3 == '/d':
-        CR = '•Mʀ★Kʀíѕhñᴀ•❣️'
+        CR = '°MR KRISHNA🇮🇳'
     elif raw_text3:
         try:
             text, link = raw_text3.split(',')
@@ -296,7 +286,6 @@ async def upload(bot: Client, m: Message):
     else:
         CR = credit
    
-    # 5. PW Token
     await editable.edit("**🔐 𝗘𝗻𝘁𝗲𝗿 𝗣𝘄 𝗧𝗼𝗸𝗲𝗻 𝗙𝗼𝗿 𝗣𝘄 𝗨𝗽𝗹𝗼𝗮𝗱𝗶𝗻𝗴 𝗼𝗿 𝗦𝗲𝗻𝗱 `3` 𝗙𝗼𝗿 𝗢𝘁𝗵𝗲𝗿𝘀**")
     input4: Message = await bot.listen(editable.chat.id)
     raw_text4 = input4.text
@@ -306,7 +295,6 @@ async def upload(bot: Client, m: Message):
     else:
         MR = raw_text4
     
-    # 6. Thumbnail
     await editable.edit("🖼️ 𝗡𝗼𝘄 𝗦𝗲𝗻𝗱 𝗧𝗵𝗲 𝗧𝗵𝘂𝗺𝗯 𝗨𝗿𝗹 𝗘𝗴 » https://graph.org/file/13a89d77002442255efad-989ac290c1b3f13b44.jpg\n\n📌 𝗢𝗿 𝗜𝗳 𝗗𝗼𝗻'𝘁 𝗪𝗮𝗻𝘁 𝗧𝗵𝘂𝗺𝗯𝗻𝗮𝗶𝗹 𝗦𝗲𝗻𝗱 = /d")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
@@ -394,18 +382,91 @@ async def upload(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
             try:
-                # EXACT SAME CAPTION AS IN YOUR NEW IMAGE (Plain text, no bold)
-                cc_template = f"Index: {count}\n\nTitle: 🎥 {name1}.mp4\n\nTopic: {topic}\n\nBatch: {b_name}\n\nExtracted By: {CR}"
+                live_time = datetime.now(IST).strftime("%A, %d %B %Y • %I:%M %p")
+                
+                # EXACT SAME CAPTION AS IN YOUR IMAGE (Plain text, no bold)
+                cc_template = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
 
-                cyt_template = f"Index: {count}\n\nTitle: 🎥 {name1}.mp4\n\nTopic: {topic}\n\nBatch: {b_name}\n\nLink: {url}\n\nExtracted By: {CR}"
+· ─ 📚 {b_name}  ─ ·
 
-                cpvod_template = f"Index: {count}\n\nTitle: 🎥 {name1}.mp4\n\nTopic: {topic}\n\nBatch: {b_name}\n\nLink: {url}\n\nExtracted By: {CR}"
+🎞️ Title: {name1}
+├── Extention: {CR}.mp4
+├── Resolution: {res}
 
-                cimg = f"Index: {count}\n\nTitle: 🖼️ {name1}.jpg\n\nTopic: {topic}\n\nBatch: {b_name}\n\nExtracted By: {CR}"
+📚 Course: {b_name}
 
-                cczip = f"Index: {count}\n\nTitle: 📦 {name1}.zip\n\nTopic: {topic}\n\nBatch: {b_name}\n\nExtracted By: {CR}"
+🌟 Extracted By: {CR}
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+📅 {live_time}'''
 
-                cc1 = f"Index: {count}\n\nTitle: 📄 {name1}.pdf\n\nTopic: {topic}\n\nBatch: {b_name}\n\nExtracted By: {CR}"
+                cyt_template = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
+
+· ─ 📚 {b_name}  ─ ·
+
+🎞️ Title: {name1}
+├── Extention: {CR}.mp4
+├── Resolution: {res}
+├── Video URL: <a href="{url}">Watch Here</a>
+
+📚 Course: {b_name}
+
+🌟 Extracted By: {CR}
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+📅 {live_time}'''
+
+                cpvod_template = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
+
+· ─ 📚 {b_name}  ─ ·
+
+🎞️ Title: {name1}
+├── Extention: {CR}.mp4
+├── Resolution: {res}
+├── Video URL: <a href="{url}">Watch Here</a>
+
+📚 Course: {b_name}
+
+🌟 Extracted By: {CR}
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+📅 {live_time}'''
+
+                cimg = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
+
+· ─ 📚 {b_name}  ─ ·
+
+🖼️ Title: {name1}
+├── Extention: {CR}.jpg
+
+📚 Course: {b_name}
+
+🌟 Extracted By: {CR}
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+📅 {live_time}'''
+
+                cczip = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
+
+· ─ 📚 {b_name}  ─ ·
+
+📦 Title: {name1}
+├── Extention: {CR}.zip
+
+📚 Course: {b_name}
+
+🌟 Extracted By: {CR}
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+📅 {live_time}'''
+
+                cc1 = f'''───── ✦ {str(count).zfill(2)} ✦ ─────
+
+· ─ 📚 {b_name}  ─ ·
+
+📄 Title: {name1}
+├── Extention: {CR}.pdf
+
+📚 Course: {b_name}
+
+🌟 Extracted By: {CR}
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+📅 {live_time}'''
 
                 if "drive" in url:
                     try:
